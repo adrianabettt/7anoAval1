@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Vetores Profª Adriana</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; padding: 20px; margin: 0; }
+        .container { max-width: 850px; background: white; margin: 20px auto; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2980b9; margin-bottom: 10px; }
+        .subtitulo { text-align: center; color: #7f8c8d; margin-bottom: 30px; }
+        
+        .questao { background: #fff; padding: 20px; margin: 20px 0; border: 1px solid #e0e0e0; border-left: 6px solid #3498db; border-radius: 8px; }
+        .pergunta-texto { font-weight: bold; font-size: 1.1em; color: #2c3e50; margin-bottom: 15px; display: block; }
+        
+        .alternativas { list-style: none; padding: 0; }
+        .alternativas li { margin: 12px 0; padding: 10px; border: 1px solid #f0f0f0; border-radius: 6px; transition: 0.3s; background: #f8f9fa; }
+        .alternativas li:hover { background: #e8f4fd; border-color: #3498db; }
+        .alternativas label { display: flex; align-items: center; cursor: pointer; width: 100%; }
+        .alternativas input { margin-right: 15px; transform: scale(1.2); }
+
+        .btn-finalizar { background: #27ae60; color: white; border: none; padding: 20px; font-size: 1.2em; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-finalizar:hover { background: #219150; transform: translateY(-2px); }
+
+        #modalOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
+        .modal { background: white; padding: 35px; width: 90%; max-width: 500px; border-radius: 20px; text-align: center; animation: surgir 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes surgir { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .nota { font-size: 45px; font-weight: bold; color: #2980b9; margin: 15px 0; }
+        .relatorio { max-height: 250px; overflow-y: auto; background: #f1f2f6; padding: 15px; border-radius: 12px; margin: 20px 0; text-align: left; border: 1px solid #ddd; line-height: 1.6; }
+
+        footer { margin-top: 50px; padding: 30px; border-top: 2px solid #2980b9; text-align: center; background-color: #f8f9fa; border-radius: 0 0 15px 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🧠 Desafio: Vetores e Listas</h1>
+    <p class="subtitulo">Pensamento Computacional - Profª Adriana Bett Terebinto</p>
+
+    <div style="background: #e8f4fd; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px dashed #3498db;">
+        <label><strong>NOME DO EXPLORADOR(A):</strong></label>
+        <input type="text" id="nome" style="width: 100%; padding: 12px; margin-top: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;" placeholder="Digite seu nome completo...">
+    </div>
+
+    <form id="quizForm">
+        <div class="questao">
+            <span class="pergunta-texto">1. Como podemos definir um VETOR na programação?</span>
+            <ul class="alternativas">
+                <li><label><input type="radio" name="q1" value="0"> a) É uma peça física dentro do monitor.</label></li>
+                <li><label><input type="radio" name="q1" value="1" class="correta"> b) É uma lista de dados organizada por posições.</label></li>
+                <li><label><input type="radio" name="q1" value="0"> c) É o nome de um vírus de computador.</label></li>
+                <li><label><input type="radio" name="q1" value="0"> d) É uma tecla especial do teclado.</label></li>
+            </ul>
+        </div>
+
+        <div class="questao">
+            <span class="pergunta-texto">2. Qual a principal vantagem de usar um vetor?</span>
+            <ul class="alternativas">
+                <li><label><input type="radio" name="q2" value="1" class="correta"> a) Armazenar muitos valores em uma única variável.</label></li>
+                <li><label><input type="radio" name="q2" value="0"> b) Deixar a internet mais rápida.</label></li>
+                <li><label><input type="radio" name="q2" value="0"> c) Limpar a memória do computador automaticamente.</label></li>
+                <li><label><input type="radio" name="q2" value="0"> d) Aumentar o volume do som do jogo.</label></li>
+            </ul>
+        </div>
+
+        <div class="questao">
+            <span class="pergunta-texto">3. O que é o ÍNDICE de um vetor?</span>
+            <ul class="alternativas">
+                <li><label><input type="radio" name="q3" value="0"> a) É a cor do vetor na tela.</label></li>
+                <li><label><input type="radio" name="q3" value="0"> b) É o peso do arquivo no HD.</label></li>
+                <li><label><input type="radio" name="q3" value="1" class="correta"> c) É o número que indica a posição de um item na lista.</label></li>
+                <li><label><input type="radio" name="q3" value="0"> d) É a senha para abrir o programa.</label></li>
+            </ul>
+        </div>
+
+        <div class="questao">
+            <span class="pergunta-texto">4. Se um vetor tem 5 posições, quantos valores ele pode guardar?</span>
+            <ul class="alternativas">
+                <li><label><input type="radio" name="q4" value="0"> a) Apenas 1 valor por vez.</label></li>
+                <li><label><input type="radio" name="q4" value="0"> b) Exatamente 10 valores.</label></li>
+                <li><label><input type="radio" name="q4" value="1" class="correta"> c) Até 5 valores diferentes.</label></li>
+                <li><label><input type="radio" name="q4" value="0"> d) Infinitos valores.</label></li>
+            </ul>
+        </div>
+
+        <div class="questao">
+            <span class="pergunta-texto">5. Na maioria das linguagens de programação, qual é o índice do PRIMEIRO elemento?</span>
+            <ul class="alternativas">
+                <li><label><input type="radio" name="q5" value="0"> a) Posição 1</label></li>
+                <li><label><input type="radio" name="q5" value="1" class="correta"> b) Posição 0</label></li>
+                <li><label><input type="radio" name="q5" value="0"> c) Posição A</label></li>
+                <li><label><input type="radio" name="q5" value="0"> d) Posição 10</label></li>
+            </ul>
+        </div>
+
+        <div class="questao">
+            <span class="pergunta-texto">6. Qual dessas situações é ideal para usar um vetor?</span>
+            <ul class="alternativas">
+                <li><label><input type="radio" name="q6" value="0"> a) Salvar apenas a idade de uma pessoa.</label></li>
+                <li><label><input type="radio" name="q6" value="0"> b) Escrever uma única frase curta.</label></li>
+                <li><label><input type="radio" name="q6" value="1" class="correta"> c) Guardar a lista de chamada de uma turma inteira.</label></li>
+                <li><label><input type="radio" name="q6" value="0"> d) Mudar o papel de parede do Windows.</label></li>
+            </ul>
+        </div>
+
+        <div class="questao">
+            <span class="pergunta-texto">7. Como um computador acessa um dado dentro de um vetor?</span>
+            <ul class="alternativas">
+                <li><label><input type="radio" name="q7" value="1" class="correta"> a) Através do nome do vetor + o número do índice.</label></li>
+                <li><label><input type="radio" name="q7" value="0"> b) Adivinhando o que o usuário quer.</label></li>
+                <li><label><input type="radio" name="q7" value="0"> c) Apagando os outros dados da lista.</label></li>
+                <li><label><input type="radio" name="q7" value="0"> d) Reiniciando o programa.</label></li>
+            </ul>
+        </div>
+
+        <div class="questao">
+            <span class="pergunta-texto">8. Se você criar um vetor de "frutas", o que acontece se você mudar o valor no índice 2?</span>
+            <ul class="alternativas">
+                <li><label><input type="radio" name="q8" value="0"> a) O vetor inteiro é apagado.</label></li>
+                <li><label><input type="radio" name="q8" value="1" class="correta"> b) Apenas a fruta naquela posição é substituída.</label></li>
+                <li><label><input type="radio" name="q8" value="0"> c) O computador cria um novo vetor sozinho.</label></li>
+                <li><label><input type="radio" name="q8" value="0"> d) Não é possível mudar valores em vetores.</label></li>
+            </ul>
+        </div>
+
+        <div class="questao">
+            <span class="pergunta-texto">9. Vetores são importantes para o Pensamento Computacional porque ajudam na:</span>
+            <ul class="alternativas">
+                <li><label><input type="radio" name="q9" value="1" class="correta"> a) Organização de dados e reconhecimento de padrões.</label></li>
+                <li><label><input type="radio" name="q9" value="0"> b) Pintura de desenhos digitais.</label></li>
+                <li><label><input type="radio" name="q9" value="0"> c) Digitação mais rápida de textos.</label></li>
+                <li><label><input type="radio" name="q9" value="0"> d) Navegação em redes sociais.</label></li>
+            </ul>
+        </div>
+
+        <div class="questao">
+            <span class="pergunta-texto">10. Em um jogo de corrida, o que um vetor poderia armazenar?</span>
+            <ul class="alternativas">
+                <li><label><input type="radio" name="q10" value="0"> a) Apenas o nome do jogo.</label></li>
+                <li><label><input type="radio" name="q10" value="0"> b) O brilho da tela do celular.</label></li>
+                <li><label><input type="radio" name="q10" value="0"> c) O tempo que o computador está ligado.</label></li>
+                <li><label><input type="radio" name="q10" value="1" class="correta"> d) O tempo de cada volta de todos os competidores.</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="btn-finalizar" onclick="corrigir()">CONCLUIR DESAFIO 🚀</button>
+    </form>
+
+    <footer>
+        <p><strong>Material Pedagógico - Profª Adriana Bett Terebinto © 2026</strong></p>
+        <p style="font-style: italic;">Habilidade BNCC EF04CO01 - Introdução a Estruturas de Dados</p>
+        <p style="font-size: 0.85em; color: #636e72;">São Lourenço do Oeste - SC</p>
+    </footer>
+</div>
+
+<div id="modalOverlay">
+    <div class="modal">
+        <h2>📊 Relatório de Desempenho</h2>
+        <div id="statusNome" style="font-weight: bold; color: #34495e;"></div>
+        <div class="nota" id="notaExibida"></div>
+        <div class="relatorio" id="listaErros"></div>
+        <button class="btn-finalizar" style="margin-top: 10px;" onclick="location.reload()">RECOMEÇAR</button>
+    </div>
+</div>
+
+<script>
+function corrigir(){
+    let nome = document.getElementById("nome").value;
+    if(nome.trim().length < 3){
+        alert("Por favor, digite seu nome completo para registrar o quiz!");
+        return;
+    }
+
+    let acertos = 0;
+    let feedbackHtml = "";
+
+    for(let i=1; i<=10; i++){
+        let questao = document.querySelector(`input[name="q${i}"]:checked`);
+        let correta = document.querySelector(`input[name="q${i}"].correta`);
+        
+        if(questao && questao.classList.contains('correta')){
+            acertos++;
+            feedbackHtml += `<div style="color: green;">Questão ${i}: Correta ✅</div>`;
+        } else {
+            feedbackHtml += `<div style="color: #c0392b;">Questão ${i}: Incorreta ❌</div>`;
+        }
+    }
+
+    document.getElementById("statusNome").innerText = "Explorador: " + nome;
+    document.getElementById("notaExibida").innerHTML = acertos + " / 10";
+    document.getElementById("listaErros").innerHTML = feedbackHtml;
+    document.getElementById("modalOverlay").style.display = "flex";
+}
+</script>
+
+</body>
+</html>
